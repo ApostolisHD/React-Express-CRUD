@@ -7,6 +7,7 @@ const path = require('path');
 
 
 var bodyParser = require('body-parser');
+const { request, response } = require("express");
 
 
 
@@ -19,7 +20,9 @@ app.use(cors());
 
 app.use(express.static(path.join(__dirname, 'client/build')));
 
-app.get("/")
+app.get("*") ,(request,response) => {
+  response.sendFile(path.join(__dirname + "/client/build/index.js"))
+}
 
 app.get("/employee", pool.getEmployee)
 app.post("/register", pool.createEmployee)
