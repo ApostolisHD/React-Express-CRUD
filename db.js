@@ -4,7 +4,7 @@ const bigInt = require("big-integer");
 
 
 const pool = new Pool({
-  connectionString:process.env.DATABASE_URL || "postgres://omfdzpjoztradp:f522399c06eb376b76715a7be857afcf657546c736f9de0f959b4c83ae121d14@ec2-3-214-3-162.compute-1.amazonaws.com:5432/dgsfgr7nf1ieg" , 
+  connectionString:process.env.DATABASE_URL || "postgres://gkavprwlnkszxv:ae28d6ef497bbaab23ec94743c0cc85e9eec3ba72dd8daa54830890572074a6c@ec2-34-247-118-233.eu-west-1.compute.amazonaws.com:5432/dtikki8f2mtu0" , 
   ssl:process.env.DATABASE_URL ? true : false
 })
 // const pool = new Pool ({
