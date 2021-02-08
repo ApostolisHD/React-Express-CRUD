@@ -3,10 +3,10 @@ const {Pool} = require("pg");
 const bigInt = require("big-integer");
 
 const pool = new Pool ({
-    user: "postgres",
-    password: "123456",
-    database:"employee_databse",
-    host: "localhost",
+    user: "omfdzpjoztradpostgres",
+    password: "f522399c06eb376b76715a7be857afcf657546c736f9de0f959b4c83ae121d14",
+    database:"dgsfgr7nf1ieg",
+    host: "ec2-3-214-3-162.compute-1.amazonaws.com",
     port: 5432
 })
 
