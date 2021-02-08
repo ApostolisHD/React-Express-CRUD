@@ -15,7 +15,7 @@ const [firstnameReg ,setfirstnameReg]=useState();
 const [dateofbirthReg ,setdateofBirthReg]=useState(new Date());
 const register = () => {
 
-  Axios.post("http://localhost:5000/register",{
+  Axios.post('/api/register',{
     last_name:lastnameReg ,
     first_name:firstnameReg,
     date_of_birth:dateofbirthReg,
