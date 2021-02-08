@@ -9,7 +9,7 @@ const cors = require("cors");
 var session = require('express-session');
 var bodyParser = require('body-parser');
 
-const whitelist = ['http://localhost:3000'​, 'http://localhost:5080'​,'https://sheltered-bastion-88856.herokuapp.com/' ​]
+const whitelist = ['http://localhost:3000'​, 'http://localhost:5000'​​]
 const corsOptions = {
   origin: function (origin, callback) {
     console.log("** Origin of request " + origin)
@@ -28,7 +28,7 @@ app.use(bodyParser.json());
 
 
 app.use(express.json()); //===>req the body database
-app.use(cors());
+app.use(cors(corsOptions));
 
 const path = require('path');
 if (process.env.NODE_ENV === 'production') {
