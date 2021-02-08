@@ -21,13 +21,13 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, 'client/build')));
 
 app.get("*") ,(request,response) => {
-  response.sendFile(path.join(__dirname + "/client/build/index.js"))
+  response.sendFile(path.join(__dirname + "/client/build/index.html"))
 }
 
-app.get("/employee", pool.getEmployee)
-app.post("/register", pool.createEmployee)
-app.put("/employee/:id", pool.updateEmployee)
-app.delete("/employee/:id", pool.deleteEmployee)
+app.get("/api/employee", pool.getEmployee)
+app.post("/api/register", pool.createEmployee)
+app.put("/api/employee/:id", pool.updateEmployee)
+app.delete("/api/employee/:id", pool.deleteEmployee)
 
 
 
