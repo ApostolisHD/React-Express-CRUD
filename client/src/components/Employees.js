@@ -17,18 +17,18 @@ const TableData = (props) => {
   console.log(props)
   const updateEmployee =  async(id) => {
     const request = await Axios.put(
-      `/api/employee/${id}`, {
+      `api/employee/${id}`, {
       last_name:lastnameReg,
       first_name:firstnameReg,
       is_active:isActive
     })
     console.log(request);
   }
-
+ 
   
   const deleteEmployee = async (id) => {
     try {
-      const deleteEmployee = await Axios.delete(`/api/employee/${id}`)
+      const deleteEmployee = await Axios.delete(`api/employee/${id}`)
       console.log(deleteEmployee)
       setDataIndex(dataIndex.filter(dataIndex => dataIndex.id !== id))
     } catch (error) {
@@ -38,7 +38,7 @@ const TableData = (props) => {
   //useEffect(()=> {deleteEmployee()},[])
   
   const showEmployee =  async () => {
-    const request = await Axios.get("/api/employee")
+    const request = await Axios.get("api/employee")
     const employee={employee:request.data.map(entry => entry.last_name)}
     console.log(employee)
     setDataIndex(request.data)  

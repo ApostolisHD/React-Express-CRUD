@@ -24,10 +24,10 @@ app.get("*") ,(request,response) => {
   response.sendFile(path.join(__dirname + "/client/index.html"))
 }
 
-app.get("/api/employee", pool.getEmployee)
-app.post("/api/register", pool.createEmployee)
-app.put("/api/employee/:id", pool.updateEmployee)
-app.delete("/api/employee/:id", pool.deleteEmployee)
+app.get("api/employee", pool.getEmployee)
+app.post("api/register", pool.createEmployee)
+app.put("api/employee/:id", pool.updateEmployee)
+app.delete("api/employee/:id", pool.deleteEmployee)
 
 
 
