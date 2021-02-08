@@ -28,7 +28,7 @@ const TableData = (props) => {
   
   const deleteEmployee = async (id) => {
     try {
-      const deleteEmployee = await Axios.delete(`api/employee/${id}`)
+      const deleteEmployee = await Axios.delete(`/api/employee/${id}`)
       console.log(deleteEmployee)
       setDataIndex(dataIndex.filter(dataIndex => dataIndex.id !== id))
     } catch (error) {
