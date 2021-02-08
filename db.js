@@ -3,32 +3,29 @@ const {Pool , Client} = require("pg");
 const bigInt = require("big-integer");
 
 
-const client = new Client({
-  connectionString:process.env.DATABASE_URL,
-  ssl:true
+const pool = new Pool({
+  connectionString:process.env.DATABASE_URL || "http://127.0.0.1:63100/?key=ac35560e-e273-47e0-bc91-b258fd28a4bd" , 
+  ssl:process.env.DATABASE_URL ? true : false
 })
-client.connect();
-
-
-
 // const pool = new Pool ({
 //     user: "postgres",
 //     password: "123456",
 //     database:"employee_databse",
 //     host: "localhost",
-//     port: 5432
+//     port: 5432,
+//     ssl:true
 // })
 
-
+pool.connect();
 
 //routes//
 
 //get all employees 
 const getEmployee = async (request, response) => {
     try{
-      const allEmployee = await pool.query("SELECT id, last_name, first_name, to_char(date_of_birth, 'DD/MM/YYYY') AS date_of_birth, is_active FROM employee ORDER BY id ASC ", (q_err,q_res) =>{
-          response.status(200).json(q_res)
-          console.log(q_res)
+      await pool.query("SELECT id, last_name, first_name, to_char(date_of_birth, 'DD/MM/YYYY') AS date_of_birth, is_active FROM employee ORDER BY id ASC ", (q_err,q_res) =>{
+          response.status(200).json(q_res.rows)
+          console.log(q_res.rows)
          })
         }catch(err) 
       {
