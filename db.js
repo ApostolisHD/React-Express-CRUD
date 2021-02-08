@@ -3,18 +3,18 @@ const {Pool , Client} = require("pg");
 const bigInt = require("big-integer");
 
 
-const pool = new Pool({
-  connectionString:process.env.DATABASE_URL || "http://127.0.0.1:63100/?key=ac35560e-e273-47e0-bc91-b258fd28a4bd" , 
-  ssl:process.env.DATABASE_URL ? true : false
-})
-// const pool = new Pool ({
-//     user: "postgres",
-//     password: "123456",
-//     database:"employee_databse",
-//     host: "localhost",
-//     port: 5432,
-//     ssl:true
+// const pool = new Pool({
+//   connectionString:process.env.DATABASE_URL || "http://127.0.0.1:63100/?key=ac35560e-e273-47e0-bc91-b258fd28a4bd" , 
+//   ssl:process.env.DATABASE_URL ? true : false
 // })
+const pool = new Pool ({
+    user: "postgres",
+    password: "123456",
+    database:"employee_databse",
+    host: "localhost",
+    port: 5432,
+})
+
 
 pool.connect();
 
