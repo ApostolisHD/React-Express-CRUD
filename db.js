@@ -3,10 +3,10 @@ const {Pool , Client} = require("pg");
 const bigInt = require("big-integer");
 
 
-const pool = new Pool({
-  connectionString:process.env.DATABASE_URL || "postgres://gkavprwlnkszxv:ae28d6ef497bbaab23ec94743c0cc85e9eec3ba72dd8daa54830890572074a6c@ec2-34-247-118-233.eu-west-1.compute.amazonaws.com:5432/dtikki8f2mtu0" , 
-  ssl:process.env.DATABASE_URL ? true : false
-})
+// const pool = new Pool({
+//   connectionString:process.env.DATABASE_URL || "postgres://gkavprwlnkszxv:ae28d6ef497bbaab23ec94743c0cc85e9eec3ba72dd8daa54830890572074a6c@ec2-34-247-118-233.eu-west-1.compute.amazonaws.com:5432/dtikki8f2mtu0" , 
+//   ssl:process.env.DATABASE_URL ? true : false
+// })
 // const pool = new Pool ({
 //     user: "postgres",
 //     password: "123456",
@@ -15,13 +15,13 @@ const pool = new Pool({
 //     port: 5432,
 // })
 
-// const pool = new Pool ({
-//     user: "omfdzpjoztradp",
-//     password: "f522399c06eb376b76715a7be857afcf657546c736f9de0f959b4c83ae121d14",
-//     database:"dgsfgr7nf1ieg",
-//     host: "ec2-3-214-3-162.compute-1.amazonaws.com",
-//     port: 5432,
-// })
+const pool = new Pool ({
+    user: "gkavprwlnkszxv",
+    password: "ae28d6ef497bbaab23ec94743c0cc85e9eec3ba72dd8daa54830890572074a6c",
+    database:"dtikki8f2mtu0",
+    host: "ec2-34-247-118-233.eu-west-1.compute.amazonaws.com",
+    port: 5432,
+})
 
 
 pool.connect();
