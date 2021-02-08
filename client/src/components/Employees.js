@@ -38,7 +38,7 @@ const TableData = (props) => {
   //useEffect(()=> {deleteEmployee()},[])
   
   const showEmployee =  async () => {
-    const request = await Axios.get("api/employee")
+    const request = await Axios.get("/api/employee")
     const employee={employee:request.data.map(entry => entry.last_name)}
     console.log(employee)
     setDataIndex(request.data)  
