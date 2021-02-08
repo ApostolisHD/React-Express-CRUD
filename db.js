@@ -16,7 +16,7 @@ const pool = new Pool ({
 const getEmployee = async (request, response) => {
     try{
       const allEmployee = await pool.query("SELECT id, last_name, first_name, to_char(date_of_birth, 'DD/MM/YYYY') AS date_of_birth, is_active FROM employee ORDER BY id ASC ", (q_err,q_res) =>{
-          response.status(200).json(q_res.rows)
+          response.status(200).json(q_res)
           console.log(q_res)
          })
         }catch(err) 
