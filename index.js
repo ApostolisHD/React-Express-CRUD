@@ -9,7 +9,7 @@ const cors = require("cors");
 var session = require('express-session');
 var bodyParser = require('body-parser');
 
-const whitelist = ['http://localhost:3000'​, 'http://localhost:5080'​,"https://git.heroku.com/sheltered-bastion-88856.git" ​]
+const whitelist = ['http://localhost:3000'​, 'http://localhost:5080'​,'https://git.heroku.com/sheltered-bastion-88856.git' ​]
 const corsOptions = {
   origin: function (origin, callback) {
     console.log("** Origin of request " + origin)
