@@ -10,13 +10,13 @@ const client = new Client({
 
 client.connect();
 
-client.query('SELECT * FROM employee;', (err, res) => {
-  if (err) throw err;
-  for (let row of res.rows) {
-    console.log(JSON.stringify(row));
-  }
-  client.end();
-});
+// client.query('SELECT * FROM employee;', (err, res) => {
+//   if (err) throw err;
+//   for (let row of res.rows) {
+//     console.log(JSON.stringify(row));
+//   }
+//   client.end();
+// });
 
 // const pool = new Pool({
 //   connectionString:process.env.DATABASE_URL || "postgres://gkavprwlnkszxv:ae28d6ef497bbaab23ec94743c0cc85e9eec3ba72dd8daa54830890572074a6c@ec2-34-247-118-233.eu-west-1.compute.amazonaws.com:5432/dtikki8f2mtu0" , 

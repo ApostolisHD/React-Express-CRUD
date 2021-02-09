@@ -4,7 +4,7 @@ const pool = require("./db");
 const app = express();
 const cors = require("cors");
 const path = require('path');
-
+require('dotenv').config()
 
 var bodyParser = require('body-parser');
 const { request, response } = require("express");
