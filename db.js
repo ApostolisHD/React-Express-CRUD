@@ -22,22 +22,21 @@ const bigInt = require("big-integer");
 //   connectionString:process.env.DATABASE_URL || "postgres://gkavprwlnkszxv:ae28d6ef497bbaab23ec94743c0cc85e9eec3ba72dd8daa54830890572074a6c@ec2-34-247-118-233.eu-west-1.compute.amazonaws.com:5432/dtikki8f2mtu0" , 
 //   ssl:process.env.DATABASE_URL ? true : false
 // })
+// const client = new Client ({
+//     user: "postgres",
+//     password: "123456",
+//     database:"employee_databse",
+//     host: "localhost",
+//     port: 5432,
+// })
+
 const client = new Client ({
-    user: "postgres",
-    password: "123456",
-    database:"employee_databse",
-    host: "localhost",
+    user: "gkavprwlnkszxv",
+    password: "ae28d6ef497bbaab23ec94743c0cc85e9eec3ba72dd8daa54830890572074a6c",
+    database:"dtikki8f2mtu0",
+    host: "ec2-34-247-118-233.eu-west-1.compute.amazonaws.com",
     port: 5432,
 })
-
-// const client = new Client ({
-//     user: "gkavprwlnkszxv",
-//     password: "ae28d6ef497bbaab23ec94743c0cc85e9eec3ba72dd8daa54830890572074a6c",
-//     database:"dtikki8f2mtu0",
-//     host: "ec2-34-247-118-233.eu-west-1.compute.amazonaws.com",
-//     port: 5432,
-//     ssl:true
-// })
 client.connect();
 
 // pool.connect();
