@@ -3,6 +3,21 @@ const {Pool , Client} = require("pg");
 const bigInt = require("big-integer");
 
 
+const client = new Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: process.env.DATABASE_URL ? true : false
+});
+
+client.connect();
+
+client.query('SELECT * FROM employee;', (err, res) => {
+  if (err) throw err;
+  for (let row of res.rows) {
+    console.log(JSON.stringify(row));
+  }
+  client.end();
+});
+
 // const pool = new Pool({
 //   connectionString:process.env.DATABASE_URL || "postgres://gkavprwlnkszxv:ae28d6ef497bbaab23ec94743c0cc85e9eec3ba72dd8daa54830890572074a6c@ec2-34-247-118-233.eu-west-1.compute.amazonaws.com:5432/dtikki8f2mtu0" , 
 //   ssl:process.env.DATABASE_URL ? true : false
@@ -15,22 +30,22 @@ const bigInt = require("big-integer");
 //     port: 5432,
 // })
 
-const pool = new Pool ({
-    user: "gkavprwlnkszxv",
-    password: "ae28d6ef497bbaab23ec94743c0cc85e9eec3ba72dd8daa54830890572074a6c",
-    database:"dtikki8f2mtu0",
-    host: "ec2-34-247-118-233.eu-west-1.compute.amazonaws.com",
-    port: 5432,
-})
+// const pool = new Pool ({
+//     user: "gkavprwlnkszxv",
+//     password: "ae28d6ef497bbaab23ec94743c0cc85e9eec3ba72dd8daa54830890572074a6c",
+//     database:"dtikki8f2mtu0",
+//     host: "ec2-34-247-118-233.eu-west-1.compute.amazonaws.com",
+//     port: 5432,
+// })
 
 
-pool.connect();
+// pool.connect();
 
-pool.query("SELECT * FORM employee",(q_err ,q_res) =>
+client.query("SELECT public,employee FORM public.employee",(q_err ,q_res) =>
 {if(!q_err){
   console.log(result.rows)
 }
-pool.end()
+client.end()
 }
 )
 
@@ -39,7 +54,7 @@ pool.end()
 //get all employees 
 const getEmployee = async (request, response) => {
     try{
-      await pool.query("SELECT id, last_name, first_name, to_char(date_of_birth, 'DD/MM/YYYY') AS date_of_birth, is_active FROM employee ORDER BY id ASC ", (q_err,q_res) =>{
+      await client.query("SELECT id, last_name, first_name, to_char(date_of_birth, 'DD/MM/YYYY') AS date_of_birth, is_active FROM employee ORDER BY id ASC ", (q_err,q_res) =>{
           response.status(200).json(q_res.rows)
           console.log(q_res.rows)
          })
@@ -55,7 +70,7 @@ const getEmployee = async (request, response) => {
 const getEmployeeById = async (request, response) => {
   const id = request.params.id
     try{
-        await pool.query("SELECT * FROM employee WHERE id=$1", [id] ,(q_err,q_res) =>{
+        await client.query("SELECT * FROM employee WHERE id=$1", [id] ,(q_err,q_res) =>{
         response.status(200).json(q_res)
         console.log(q_res)
     })   
@@ -75,7 +90,7 @@ const createEmployee = async (request, response) => {
     date_of_birth= request.body.date_of_birth
 
     try{
-    await pool.query("INSERT INTO employee (last_name , first_name , date_of_birth, is_active) VALUES ($1, $2 ,$3,false)", [last_name, first_name, date_of_birth]);
+    await client.query("INSERT INTO employee (last_name , first_name , date_of_birth, is_active) VALUES ($1, $2 ,$3,false)", [last_name, first_name, date_of_birth]);
           
     response.status(201).send("Employee added!!!") // status created 
     }catch(err) 
@@ -92,7 +107,7 @@ const updateEmployee = async(request, response ,next) => {
     first_name=request.body.first_name
     is_active=request.body.is_active
     try{
-    pool.query(
+    client.query(
       "UPDATE employee SET last_name= $1, first_name= $2, is_active=$3 WHERE id = $4",
       [last_name,first_name,is_active,id])
         response.status(200).send("employee modified")
@@ -107,7 +122,7 @@ const updateEmployee = async(request, response ,next) => {
 const deleteEmployee = async (request, response) => {
     const id = request.params.id
     try{
-    pool.query("DELETE FROM employee WHERE id = $1", [id])
+    client.query("DELETE FROM employee WHERE id = $1", [id])
     response.status(200).send(`employee deleted with ID: ${id}`)
     }catch(err){
         console.error(error.message)

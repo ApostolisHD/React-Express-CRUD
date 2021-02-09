@@ -10,8 +10,8 @@ function Home(){
   
   <div className="demo-nav">
     <Link to="/">Login</Link>
-    <Link to="/register">Register</Link>
-    <Link to= "/employeelist">Applications</Link>
+    <Link to="/api/register">Register</Link>
+    <Link to= "/api/employeelist">Applications</Link>
   </div>
   <div className="demo">
   <Switch>
