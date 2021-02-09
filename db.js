@@ -3,12 +3,12 @@ const {Pool , Client} = require("pg");
 const bigInt = require("big-integer");
 
 
-const client = new Client({
-  connectionString: process.env.DATABASE_URL,
-  ssl: process.env.DATABASE_URL ? true : false
-});
+// const client = new Client({
+//   connectionString: process.env.DATABASE_URL ,
+//   ssl: process.env.DATABASE_URL ? true : false
+// });
 
-client.connect();
+
 
 // client.query('SELECT * FROM employee;', (err, res) => {
 //   if (err) throw err;
@@ -22,102 +22,88 @@ client.connect();
 //   connectionString:process.env.DATABASE_URL || "postgres://gkavprwlnkszxv:ae28d6ef497bbaab23ec94743c0cc85e9eec3ba72dd8daa54830890572074a6c@ec2-34-247-118-233.eu-west-1.compute.amazonaws.com:5432/dtikki8f2mtu0" , 
 //   ssl:process.env.DATABASE_URL ? true : false
 // })
-// const pool = new Pool ({
-//     user: "postgres",
-//     password: "123456",
-//     database:"employee_databse",
-//     host: "localhost",
-//     port: 5432,
-// })
+const client = new Client ({
+    user: "postgres",
+    password: "123456",
+    database:"employee_databse",
+    host: "localhost",
+    port: 5432,
+})
 
-// const pool = new Pool ({
+// const client = new Client ({
 //     user: "gkavprwlnkszxv",
 //     password: "ae28d6ef497bbaab23ec94743c0cc85e9eec3ba72dd8daa54830890572074a6c",
 //     database:"dtikki8f2mtu0",
 //     host: "ec2-34-247-118-233.eu-west-1.compute.amazonaws.com",
 //     port: 5432,
+//     ssl:true
 // })
-
+client.connect();
 
 // pool.connect();
 
-client.query("SELECT public,employee FORM public.employee",(q_err ,q_res) =>
-{if(!q_err){
-  console.log(result.rows)
-}
-client.end()
-}
-)
+// client.query("SELECT public,employee FORM public.employee",(q_err ,q_res) =>
+// {if(!q_err){
+//   console.log(result.rows)
+// }
+// client.end()
+// }
+// )
 
 //routes//
 
 //get all employees 
 const getEmployee = async (request, response) => {
     try{
-      await client.query("SELECT id, last_name, first_name, to_char(date_of_birth, 'DD/MM/YYYY') AS date_of_birth, is_active FROM employee ORDER BY id ASC ", (q_err,q_res) =>{
-          response.status(200).json(q_res.rows)
-          console.log(q_res.rows)
+      await client.query("SELECT id, last_name, first_name, to_char(date_of_birth, 'DD/MM/YYYY') AS date_of_birth, is_active FROM employee ORDER BY id ASC ", (error,result) =>{
+          response.status(200).json(result.rows)
+          console.log(result)
          })
-        }catch(err) 
+        }catch(error) 
       {
-        console.error(err.message);
+        console.error(error.message);
       }
     }
-
-
 
 //get employee
 const getEmployeeById = async (request, response) => {
   const id = request.params.id
     try{
-        await client.query("SELECT * FROM employee WHERE id=$1", [id] ,(q_err,q_res) =>{
-        response.status(200).json(q_res)
-        console.log(q_res)
+        await client.query("SELECT * FROM employee WHERE id=$1", [id] ,(error,result) =>{
+        response.status(200).json(result)
+        console.log(result)
     })   
-      }catch(err) 
+      }catch(error) 
       {
-        console.error(err.message);
+        console.error(error.message);
       }
   }
 
-
-
 //register an employee
 const createEmployee = async (request, response) => {
-    const {is_active,id} = request.body;
-    last_name=request.body.last_name
-    first_name=request.body.first_name
-    date_of_birth= request.body.date_of_birth
-
+    const {last_name,first_name,date_of_birth} = request.body;
     try{
-    await client.query("INSERT INTO employee (last_name , first_name , date_of_birth, is_active) VALUES ($1, $2 ,$3,false)", [last_name, first_name, date_of_birth]);
-          
-    response.status(201).send("Employee added!!!") // status created 
-    }catch(err) 
+    await client.query("INSERT INTO employee (last_name , first_name , date_of_birth, is_active) VALUES ($1, $2 ,$3,false)", 
+    [last_name, first_name, date_of_birth]);      
+    response.status(201).send("Employee added!!!") 
+    }catch(error) 
   {
-    console.error(err.message);
+    console.error(error.message);
   }
 }
-
-
 //update a employee
-const updateEmployee = async(request, response ,next) => {
+const updateEmployee = async(request, response) => {
     const id = request.params.id
-    last_name=request.body.last_name
-    first_name=request.body.first_name
-    is_active=request.body.is_active
+    const {last_name,first_name,is_active} = request.body;
     try{
     client.query(
       "UPDATE employee SET last_name= $1, first_name= $2, is_active=$3 WHERE id = $4",
       [last_name,first_name,is_active,id])
         response.status(200).send("employee modified")
-      }catch(err){
-          console.error(err.message)
+      }catch(error){
+          console.error(error.message)
       }
     }
-  
-
-
 //delete a employee  
 const deleteEmployee = async (request, response) => {
     const id = request.params.id
