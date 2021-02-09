@@ -5,8 +5,10 @@
   "scripts": {
     "start": "nodemon index.js",
     "install": "npm-git install",
-    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
+    "build": "webpack",
+    "heroku-postbuild": "cd client"
   },
+  "heroku-run-build-script": true,
   "keywords": [],
   "author": "",
   "license": "ISC",

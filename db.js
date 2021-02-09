@@ -3,10 +3,10 @@ const {Pool , Client} = require("pg");
 const bigInt = require("big-integer");
 
 
-// const client = new Client({
-//   connectionString: process.env.DATABASE_URL ,
-//   ssl: process.env.DATABASE_URL ? true : false
-// });
+const client = new Client({
+  connectionString: process.env.DATABASE_URL ,
+  ssl: process.env.DATABASE_URL ? true : false
+});
 
 
 
@@ -30,13 +30,13 @@ const bigInt = require("big-integer");
 //     port: 5432,
 // })
 
-const client = new Client ({
-    user: "gkavprwlnkszxv",
-    password: "ae28d6ef497bbaab23ec94743c0cc85e9eec3ba72dd8daa54830890572074a6c",
-    database:"dtikki8f2mtu0",
-    host: "ec2-34-247-118-233.eu-west-1.compute.amazonaws.com",
-    port: 5432,
-})
+// const client = new Client ({
+//     user: "gkavprwlnkszxv",
+//     password: "ae28d6ef497bbaab23ec94743c0cc85e9eec3ba72dd8daa54830890572074a6c",
+//     database:"dtikki8f2mtu0",
+//     host: "ec2-34-247-118-233.eu-west-1.compute.amazonaws.com",
+//     port: 5432,
+// })
 client.connect();
 
 // pool.connect();
