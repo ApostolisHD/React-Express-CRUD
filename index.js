@@ -18,10 +18,10 @@ app.use(bodyParser.json());
 app.use(express.json()); //===>req the body database
 app.use(cors());
 
-app.use(express.static(path.join(__dirname, '/client/build')));
+app.use(express.static(path.join(__dirname, '/client/public')));
 
-app.get("/") ,(request,response) => {
-  response.sendFile(path.join(__dirname + "/client/build/index.html"))
+app.get("*") ,(request,response) => {
+  response.sendFile(path.join(__dirname + "/client/public/index.html"))
 }
 
 app.get("/api/employee", pool.getEmployee)
