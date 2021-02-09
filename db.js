@@ -54,7 +54,7 @@ client.connect();
 //get all employees 
 const getEmployee = async (request, response) => {
     try{
-      await client.query("SELECT id, last_name, first_name, to_char(date_of_birth, 'DD/MM/YYYY') AS date_of_birth, is_active FROM employee ORDER BY id ASC ", (error,result) =>{
+      await client.query("SELECT id, last_name, first_name, to_char(date_of_birth, 'DD/MM/YYYY') AS date_of_birth, is_active FROM public.employee ORDER BY id ASC ", (error,result) =>{
           response.status(200).json(result.rows)
           console.log(result)
          })
@@ -82,7 +82,7 @@ const getEmployeeById = async (request, response) => {
 const createEmployee = async (request, response) => {
     const {last_name,first_name,date_of_birth} = request.body;
     try{
-    await client.query("INSERT INTO employee (last_name , first_name , date_of_birth, is_active) VALUES ($1, $2 ,$3,false)", 
+    await client.query("INSERT INTO public.employee (last_name , first_name , date_of_birth, is_active) VALUES ($1, $2 ,$3,false)", 
     [last_name, first_name, date_of_birth]);      
     response.status(201).send("Employee added!!!") 
     }catch(error) 
@@ -96,7 +96,7 @@ const updateEmployee = async(request, response) => {
     const {last_name,first_name,is_active} = request.body;
     try{
     client.query(
-      "UPDATE employee SET last_name= $1, first_name= $2, is_active=$3 WHERE id = $4",
+      "UPDATE public.employee SET last_name= $1, first_name= $2, is_active=$3 WHERE id = $4",
       [last_name,first_name,is_active,id])
         response.status(200).send("employee modified")
       }catch(error){
@@ -107,7 +107,7 @@ const updateEmployee = async(request, response) => {
 const deleteEmployee = async (request, response) => {
     const id = request.params.id
     try{
-    client.query("DELETE FROM employee WHERE id = $1", [id])
+    client.query("DELETE FROM public.employee WHERE id = $1", [id])
     response.status(200).send(`employee deleted with ID: ${id}`)
     }catch(err){
         console.error(error.message)
