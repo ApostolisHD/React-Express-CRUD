@@ -1,6 +1,6 @@
 
 const express = require("express");
-const pool = require("./db");
+const pool = require("./Routes");
 const app = express();
 const cors = require("cors");
 const path = require('path');
