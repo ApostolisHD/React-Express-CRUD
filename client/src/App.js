@@ -3,7 +3,7 @@ import { Layout } from 'antd';
 import { Avatar } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import React from "react";
-import Home from "./components/routes.js"
+import Home from "./components/routes"
 const { Header,Content } = Layout;
 
 function App() {

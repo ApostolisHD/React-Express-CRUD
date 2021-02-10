@@ -9,10 +9,11 @@ const { Column } = Table;
 
 const TableData = (props) => {
   const [dataIndex, setDataIndex] = useState()
+
+
   const deleteEmployee = async (id) => {
     try {
-      const deleteEmployee = await Axios.delete(`/api/employee/${id}`)
-      console.log(deleteEmployee)
+      await Axios.delete(`/api/employee/${id}`)
       setDataIndex(dataIndex.filter(dataIndex => dataIndex.id !== id))
     } catch (error) {
       console.error(error.message)
@@ -20,14 +21,12 @@ const TableData = (props) => {
   }
   const showEmployee = async () => {
     const request = await Axios.get("/api/employee")
-    console.log(request.data)
     setDataIndex(request.data)
   }
   useEffect(() => { showEmployee() }, [])
 
   function Edit(id) {
     props.history.push("/employeelist/Edit/" + id)
-    console.log(id)
   }
 
   return (

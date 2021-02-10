@@ -13,7 +13,6 @@ const EditEmployee = (props) => {
   const showEmployee = async () => {
     const id = props.match.params.id
     const request = await Axios.get(`/api/employee/${id}`)
-    console.log(request.data.rows[0].last_name)
     setLastnameReg(request.data.rows[0].last_name)
     setfirstnameReg(request.data.rows[0].first_name)
     setIsActive(request.data.rows[0].is_active)
@@ -22,12 +21,11 @@ const EditEmployee = (props) => {
 
   const onFinish = async () => {
     const id = props.match.params.id
-    const request = await Axios.put(`/api/employee/${id}`, {
+      await Axios.put(`/api/employee/${id}`, {
       last_name: lastnameReg,
       first_name: firstnameReg,
       is_active: isActive
     })
-    console.log(request);
     props.history.push("/employeelist")
   }
   const handleClick = () => {

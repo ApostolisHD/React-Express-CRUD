@@ -7,7 +7,7 @@ import FormItem from 'antd/lib/form/FormItem';
 const FormRegister = () => {
   const [lastnameReg, setLastnameReg] = useState();
   const [firstnameReg, setfirstnameReg] = useState();
-  const [isActive, setIsActive] = useState();
+  const [isActive, setIsActive] = useState(false);
   const [dateofbirthReg, setdateofBirthReg] = useState(new Date());
   const [form] = Form.useForm();
 
