@@ -1,32 +1,20 @@
-
 const express = require("express");
-const pool = require("./Routes");
 const app = express();
+const db = require("./Routes");
 const cors = require("cors");
-const path = require('path');
-
 
 var bodyParser = require('body-parser');
 
-
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-
 
 app.use(express.json());
 app.use(cors());
 
-// heroku try //
-// app.use(express.static(path.join(__dirname, '/client/build')));
+app.post("/api/register", db.createEmployee);
+app.get("/api/employee", db.getEmployee);
+app.get("/api/employee/:id", db.getEmployeeById);
+app.put("/api/employee/:id", db.updateEmployee);
+app.delete("/api/employee/:id", db.deleteEmployee);
 
-// app.get("*"), (request, response) => {
-//   response.sendFile(path.join(__dirname + "/client/build/index.html"))
-// }
-
-app.get("/api/employee", pool.getEmployee)
-app.get("/api/employee/:id", pool.getEmployeeById)
-app.post("/api/register", pool.createEmployee)
-app.put("/api/employee/:id", pool.updateEmployee)
-app.delete("/api/employee/:id", pool.deleteEmployee)
-
-app.listen(process.env.PORT || 5000, () => console.log("server running on port: http://localhost:5000"))
+app.listen(process.env.PORT || 5000, () => console.log("server running on port: http://localhost:5000"));
