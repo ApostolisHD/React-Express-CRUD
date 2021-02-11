@@ -19,7 +19,7 @@ const getEmployee = async(request, response) => {
 const getEmployeeById = async(request, response) => {
   const id = parseInt(request.params.id);
   try {
-    const results = await pool.query("SELECT id, last_name, first_name ,is_active FROM employee WHERE id=$1", [id]);
+    const results = await pool.query("SELECT id, last_name, first_name ,is_active,date_of_birth FROM employee WHERE id=$1", [id]);
     response
       .status(200)
       .json(results);
@@ -46,9 +46,9 @@ const createEmployee = async(request, response) => {
 //update a employee
 const updateEmployee = async(request, response) => {
   const id = request.params.id;
-  const {last_name, first_name, is_active} = request.body;
+  const {last_name, first_name, date_of_birth, is_active} = request.body;
   try {
-    const results = await pool.query("UPDATE employee SET last_name= $1, first_name= $2, is_active=$3 WHERE id = $4", [last_name, first_name, is_active, id]);
+    const results = await pool.query("UPDATE employee SET last_name= $1, first_name= $2, is_active=$3, date_of_birth=$4 WHERE id = $5", [last_name, first_name, is_active, date_of_birth, id]);
     response
       .status(200)
       .send("employee modified");

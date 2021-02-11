@@ -15,6 +15,7 @@ const FormRegister = () => {
   const [firstnameReg,setfirstnameReg] = useState();
   const [isActive,setIsActive] = useState(false);
   const [dateofbirthReg,setdateofBirthReg] = useState();
+  const dateFormat = 'DD/MM/YYYY';
   const [form] = Form.useForm();
 
   const register = () => {
@@ -73,7 +74,7 @@ const FormRegister = () => {
           message: 'Please input your Year Of Birth!'
         }
       ]}>
-        <DatePicker dateFormat="DD/MM/YYYY" onChange={e => setdateofBirthReg(e)}/>
+        <DatePicker format={dateFormat} onChange={e => setdateofBirthReg(e)}/>
       </Form.Item>
       <FormItem label="Active">
         <Switch onClick={handleClick}/>

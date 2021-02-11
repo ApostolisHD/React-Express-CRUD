@@ -15,7 +15,7 @@ const TableData = (props) => {
       setDataIndex(dataIndex.filter(dataIndex => dataIndex.id !== id));
     } catch (error) {
       console.error(error.message);
-    };
+    }
   };
   const showEmployee = async() => {
     const request = await Axios.get("/api/employee");
@@ -29,7 +29,7 @@ const TableData = (props) => {
     props
       .history
       .push("/employeelist/Edit/" + id);
-  }
+  };
 
   return (
     <Table dataSource={dataIndex} rowKey={record => record.id}>
@@ -47,7 +47,7 @@ const TableData = (props) => {
         key="id"
         render={(text, record) => (
         <Space size="middle">
-          <Button type="primary" htmlType="submit" onClick={() => Edit(record.id)}>Edit</Button>
+          <Button type="primary" htmlType="submit" onClick={() => Edit(record.id)}>Edit</Button>   
           <Button type="primary" danger onClick={() => deleteEmployee(record.id)}>Delete</Button>
         </Space>
       )}/>
