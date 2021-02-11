@@ -1,7 +1,6 @@
 {
   "name": "react-antd-layout",
   "version": "0.1.0",
-  "private": true,
   "dependencies": {
     "antd": "^4.11.2",
     "axios": "^0.21.1",
@@ -15,12 +14,6 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "browserslist": {
     "production": [

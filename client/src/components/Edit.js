@@ -2,7 +2,7 @@ import React from "react";
 import 'antd/dist/antd.css';
 import {useState, useEffect} from 'react';
 import Axios from "axios";
-import {Form, Button, Switch, Input,DatePicker} from 'antd';
+import {Form, Button, Select, Input, DatePicker} from 'antd';
 import FormItem from "antd/lib/form/FormItem";
 
 const EditEmployee = (props) => {
@@ -10,6 +10,7 @@ const EditEmployee = (props) => {
   const [firstnameReg,setfirstnameReg] = useState();
   const [isActive,setIsActive] = useState();
   const [dateofbirthReg,setdateofBirthReg] = useState();
+  const {Option} = Select;
   const dateFormat = 'DD/MM/YYYY';
 
   const showEmployee = async() => {
@@ -31,19 +32,11 @@ const EditEmployee = (props) => {
       last_name: lastnameReg,
       first_name: firstnameReg,
       is_active: isActive,
-      date_of_birth:dateofbirthReg
+      date_of_birth: dateofbirthReg
     });
     props
       .history
       .push("/employeelist");
-  };
-
-  const handleClick = () => {
-    if (!isActive) {
-      setIsActive("true");
-    } else {
-      setIsActive("false");
-    }
   };
 
   return (
@@ -55,16 +48,24 @@ const EditEmployee = (props) => {
           onChange={e => setLastnameReg(e.target.value)}/>
       </Form.Item>
       <Form.Item label="First Name">
-        <Input      
+        <Input
           name="first_name"
           value={firstnameReg}
           onChange={e => setfirstnameReg(e.target.value)}/>
       </Form.Item>
-      <Form.Item label="Active">
-        <Switch name="is_active" checked={isActive} onClick={handleClick} defaultChecked={isActive}/>
-      </Form.Item>
-      <FormItem >
-      <DatePicker format={dateFormat} onChange={e => setdateofBirthReg(e)} />
+      <FormItem label="Active">
+        <Select
+          value={String(isActive)}
+          style={{
+          width: "10%"
+        }}
+          onChange={e => setIsActive(e)}>
+          <Option value="true">Online</Option>
+          <Option value="false">Offline</Option>
+        </Select>
+      </FormItem>
+      <FormItem>
+        <DatePicker format={dateFormat} onChange={e => setdateofBirthReg(e)}/>
       </FormItem>
       <Form.Item label="Edit">
         <Button type="primary" htmlType="submit">Save</Button>

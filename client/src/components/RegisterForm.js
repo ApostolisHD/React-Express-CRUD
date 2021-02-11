@@ -5,7 +5,7 @@ import {
   Button,
   DatePicker,
   message,
-  Switch
+  Select
 } from 'antd';
 import Axios from "axios";
 import FormItem from 'antd/lib/form/FormItem';
@@ -13,31 +13,29 @@ import FormItem from 'antd/lib/form/FormItem';
 const FormRegister = () => {
   const [lastnameReg,setLastnameReg] = useState();
   const [firstnameReg,setfirstnameReg] = useState();
-  const [isActive,setIsActive] = useState(false);
+  const [isActive,setIsActive] = useState();
   const [dateofbirthReg,setdateofBirthReg] = useState();
-  const dateFormat = 'DD/MM/YYYY';
   const [form] = Form.useForm();
+  const {Option} = Select;
+  const dateFormat = "DD/MM/YYYY"
 
-  const register = () => {
-    Axios.post('/api/register', {
+
+  const register = async() => {
+    await Axios.post('/api/register', {
       last_name: lastnameReg,
       first_name: firstnameReg,
       is_active: isActive,
       date_of_birth: dateofbirthReg
     });
+    setLastnameReg();
+    setdateofBirthReg();
+    setfirstnameReg();
+    setIsActive();
   };
 
   const onFinish = () => {
-    form.setFieldsValue({last_name: "", first_name: "", date_of_birth: ""});
     message.info('Employeee is added!!!', 3);
-  };
-
-  const handleClick = () => {
-    if (!isActive) {
-      setIsActive(true);
-    } else {
-      setIsActive(false);
-    }
+    form.setFieldsValue({last_name: "", first_name: "", date_of_birth: "", is_active: ""});
   };
 
   return (
@@ -76,8 +74,15 @@ const FormRegister = () => {
       ]}>
         <DatePicker format={dateFormat} onChange={e => setdateofBirthReg(e)}/>
       </Form.Item>
-      <FormItem label="Active">
-        <Switch onClick={handleClick}/>
+      <FormItem name="is_active" label="Active">
+        <Select
+          style={{
+          width: "10%"
+        }}
+          onChange={e => setIsActive(e)}>
+          <Option value="true">Online</Option>
+          <Option value="false">Offline</Option>
+        </Select>
       </FormItem>
       <Form.Item label="Register">
         <Button type="primary" htmlType="submit" onClick={register}>Register</Button>
