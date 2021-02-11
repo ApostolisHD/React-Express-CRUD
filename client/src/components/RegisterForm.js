@@ -36,7 +36,7 @@ const FormRegister = () => {
       setIsActive(true);
     } else {
       setIsActive(false);
-    };
+    }
   };
 
   return (

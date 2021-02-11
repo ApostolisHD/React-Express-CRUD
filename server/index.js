@@ -14,7 +14,7 @@ app.use(cors());
 app.post("/api/register", db.createEmployee);
 app.get("/api/employee", db.getEmployee);
 app.get("/api/employee/:id", db.getEmployeeById);
-app.put("/api/employee/:id", db.updateEmployee)
+app.put("/api/employee/:id", db.updateEmployee);
 app.delete("/api/employee/:id", db.deleteEmployee);
 
 app.listen(process.env.PORT || 5000, () => console.log("server running on port: http://localhost:5000"));
