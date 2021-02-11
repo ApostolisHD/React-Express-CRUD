@@ -12,7 +12,7 @@ const getEmployee = async(request, response) => {
       .json(result.rows);
   } catch (error) {
     console.error(error.message);
-  };
+  }
 };
 
 //get employee
@@ -25,7 +25,7 @@ const getEmployeeById = async(request, response) => {
       .json(result);
   } catch (error) {
     console.error(error.message);
-  };
+  }
 };
 
 //register an employee
@@ -40,7 +40,8 @@ const createEmployee = async(request, response) => {
       .send(result);
   } catch (error) {
     console.error(error.message);
-  };
+    return null;
+  }
 };
 //update a employee
 const updateEmployee = async(request, response) => {
@@ -52,8 +53,8 @@ const updateEmployee = async(request, response) => {
       .status(200)
       .send("employee modified")
   } catch (error) {
-    
-  };
+    console.error(error.message);
+  }
 };
 //delete a employee
 const deleteEmployee = async(request, response) => {
@@ -65,7 +66,7 @@ const deleteEmployee = async(request, response) => {
       .send(`employee deleted with ID: ${id}`);
   } catch (err) {
     console.error(error.message);
-  };
+  }
 };
 
 module.exports = {
