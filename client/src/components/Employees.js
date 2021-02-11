@@ -40,7 +40,7 @@ const TableData = (props) => {
         title="Active"
         dataIndex="is_active"
         render={record => String(record) === "true"
-        ? <Badge status="success" text="Online"/>
+        ? <Badge color="#87d068" status="processing" text="Online"/>
         : <Badge status="default" text="Offline"/>}></Column>
       <Column
         title="Action"

@@ -1,6 +1,6 @@
-import './App.css';
-import { Layout,Avatar  } from 'antd';
-import { UserOutlined } from '@ant-design/icons';
+import './styles/App.css';
+import {Layout,Avatar} from 'antd';
+import {UserOutlined} from '@ant-design/icons';
 import React from "react";
 import Home from "./components/routes"
 const { Header, Content } = Layout;
